@@ -1,0 +1,23 @@
+class Solution:
+    def trap(self, nums: list[int]) -> int:
+        left_max = 0
+        right_max = 0
+        left = 0
+        right = len(nums) - 1
+        water = 0
+
+        while left < right :
+            if nums[left] < nums[right]:
+                if left_max < nums[left]:
+                    left_max = nums[left]
+                else:
+                    water += left_max - nums[left]
+                left +=1
+            else:
+                if right_max < nums[right]:
+                    right_max = nums[right]
+                else: 
+                    water += right_max - nums[right]
+                right -=1
+
+        return water

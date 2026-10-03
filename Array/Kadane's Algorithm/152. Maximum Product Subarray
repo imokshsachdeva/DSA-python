@@ -1,0 +1,11 @@
+class Solution:
+    def maxProduct(self, nums: list[int]) -> int:
+        currmin = currmax = maxpro = nums[0]
+        for i in range(1, len(nums)):
+            tmin = currmin
+            tmax = currmax
+            currmin = min(nums[i], tmin * nums[i], tmax * nums[i])
+            currmax = max(nums[i], tmax * nums[i], tmin * nums[i])
+
+            maxpro = max(maxpro,currmax)
+        return maxpro

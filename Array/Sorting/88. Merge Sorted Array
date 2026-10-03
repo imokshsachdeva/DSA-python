@@ -1,0 +1,38 @@
+class Solution:
+    def merge(self, nums1: list[int], m: int, nums2: list[int], n: int) -> None:
+        pon1 = pon2 = 0
+        nums = []
+        while pon2 < n and pon1 < m:
+            if nums1[pon1] <= nums2[pon2]:
+                nums.append(nums1[pon1])
+                pon1 += 1
+            else :
+                nums.append(nums2[pon2])
+                pon2 += 1
+        while pon1 < m:
+            nums.append(nums1[pon1])
+            pon1 += 1
+        while pon2 < n:
+            nums.append(nums2[pon2])
+            pon2 += 1
+        nums1[:] = nums
+
+
+class Solution:
+    def merge(self, nums1: list[int], m: int, nums2: list[int], n: int) -> None:
+        i = m -1 
+        j = n -1
+        k = m+n -1
+        
+        while i >= 0 and j >= 0:
+            if nums1[i] >= nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
+            else:
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
+        while j >= 0:
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1

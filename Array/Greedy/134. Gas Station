@@ -1,0 +1,36 @@
+class Solution:
+    def canCompleteCircuit(self, gas: list[int], cost: list[int]) -> int:
+        n = len(gas)
+        start_idx = 0
+        avl_gas = 0
+        
+        if sum(cost) > sum(gas) :
+            return -1
+
+        for i in range(n):
+            avl_gas += gas[i] - cost[i]
+            if avl_gas < 0 :
+                start_idx = i+1
+                avl_gas = 0
+
+        return start_idx
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: list[int], cost: list[int]) -> int:
+        avl_gas = gas[0]
+        n = len(gas)
+        start_idx = 0
+        
+        if sum(cost) > sum(gas) :
+            return -1
+
+        for i in range(n):
+            if avl_gas < cost[i] :
+                start_idx = (i+1) % n
+                avl_gas = gas[(i+1) % n]
+            else:
+                avl_gas = avl_gas + gas[(i+1) % n] - cost[i]
+
+        return start_idx
+    

@@ -7,3 +7,19 @@ class Solution:
                 row.append(matrix[i][j])
             result.append(row)
         matrix[:] = result
+
+
+class Solution:
+    def rotate(self, matrix: list[list[int]]) -> None:
+
+        for i in range(len(matrix)):
+            for j in range(i,len(matrix[0])):
+                matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+
+        for n in range(len(matrix)):
+            i = 0
+            j = len(matrix[0]) - 1
+            while i < j :
+                matrix[n][i],matrix[n][j] = matrix[n][j],matrix[n][i]
+                i+=1
+                j-=1

@@ -1,0 +1,39 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if not s or not t:
+            return ""
+
+        need = {}
+        for i in range(len(t)):
+            need[t[i]] = need.get(t[i],0) + 1
+
+        left = 0
+        win = {}
+        formed = 0
+        minlength = float("inf")
+        start = end = 0
+
+        for right in range(len(s)):
+            if s[right] in need:
+                win[s[right]] = win.get(s[right],0) + 1
+                
+                if win[s[right]] == need[s[right]]:
+                    formed += 1
+                
+            while formed == len(need):
+                if right - left + 1 < minlength:
+                    minlength = right - left + 1
+                    start = left
+                    end = right
+
+                if s[left] in need:
+                    win[s[left]] = win[s[left]] - 1
+
+                    if win[s[left]] < need[s[left]]:
+                        formed -= 1
+
+                left += 1
+        if minlength < float("inf"):
+            return s[start:end + 1]
+        else :
+            return ""

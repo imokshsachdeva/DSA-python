@@ -1,0 +1,28 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> list[int]:
+
+        result = []
+
+        if len(p) > len(s):
+            return result
+
+        pfreq = [0] * 26
+        for char in p:
+            pfreq[ord(char) - ord('a')] += 1
+        
+        sfreq = [0] * 26
+        for i in range(len(p)):
+            sfreq[ord(s[i]) - ord('a')] += 1        
+
+        left = 0
+        right = len(p)
+        while right <= len(s):
+            if sfreq == pfreq:
+                result.append(left)
+            if right == len(s):
+                break
+            sfreq[ord(s[left]) - ord('a')] -= 1
+            sfreq[ord(s[right]) - ord('a')] += 1  
+            left += 1
+            right += 1
+        return result
